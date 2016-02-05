@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Custom Radio</title>
+    <style>
+      .custom-radio {
+        position: relative;
+      }
+      .custom-radio input[type="radio"] {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+      .custom-radio label {
+        display: inline-block;
+        padding-left: 20px;
+        cursor: pointer;
+      }
+      .custom-radio label:before,
+      .custom-radio label:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        top: 50%;
+        margin-top: -7.5px
+      }
+      .custom-radio label:before {
+        background-color: #ccc
+      }
+      .custom-radio label:after {
+        display: none;
+      }
+      .custom-radio input[type="radio"]:checked + label:after {
+        animation: radio-pulse .3s forwards;
+        display: block;
+        background-color: #777;
+      }
+      @keyframes radio-pulse {
+        0%, 100% {
+          transform: scale(.5);
+        }
+        50% {
+          transform: scale(.3);
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="custom-radio">
+      <input id="radio1" type="radio" name="radio" value="yes">
+      <label for="radio1">Yes</label>
+    </div>
+    <div class="custom-radio">
+      <input id="radio2" type="radio" name="radio" value="no">
+      <label for="radio2">No</label>
+    </div>
+  </body>
+</html>
