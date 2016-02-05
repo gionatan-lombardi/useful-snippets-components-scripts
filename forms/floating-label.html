@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Floating Label</title>
+    <style>
+      .float-label {
+        position: relative;
+        padding-top: 20px;
+      }
+      .float-label-item {
+        position: absolute;
+        left: 10px;
+        top: 20px;
+        transition: top .3s, left .3s;
+      }
+      .float-label-item.is-float {
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="float-label floatLabel">
+      <label for="foo" class="float-label-item floatLabelItem">nome</label>
+      <input id="foo" name="foo" type="text" class="float-label-field floatLabelField">
+    </div>
+    <script type="text/javascript">
+
+    function floatLabel(elem, label, field, togClass) {
+      
+      // Checks for missing arguments
+      if ( typeof elem == "undefined" || typeof label == "undefined" || typeof field == "undefined" || typeof togClass == "undefined" ) throw new Error( "Missing arguments!" );
+      
+      // Adds or removes the floating class
+      function toggleClass(togClass) {
+        var re = new RegExp("(?:^|\\s)"+togClass+"(?!\\S)","g");
+        if ( this.value == "" ) {
+          label.className = label.className.replace( re , '' );
+        } else if ( !label.className.match( re ) ) {
+          label.className += label.className ? ' '+togClass : togClass;
+        }
+      }
+      
+      // Gets the DOM elements
+      var el = document.querySelector(elem); // The container
+      if(el) {
+        var label = el.querySelector(label);
+        var field = el.querySelector(field);
+      }
+      
+      // Adds event listeners
+      if(field && label) {
+        field.addEventListener("keyup", function() {
+          toggleClass.call(this, togClass);
+        }); 
+        field.addEventListener("change", function() {
+          toggleClass.call(this, togClass);
+        }); 
+      }
+    };
+
+    floatLabel(".floatLabel", ".floatLabelItem", ".floatLabelField", "is-float");
+
+    </script>
+  </body>
+</html>
